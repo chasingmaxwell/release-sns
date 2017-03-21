@@ -1,6 +1,5 @@
 {
   "name": "release-sns",
-  "version": "0.0.0-development",
   "description": "Send an SNS message upon a semantic-release version bump.",
   "main": "src/index.js",
   "scripts": {
@@ -9,7 +8,7 @@
     "lint": "eslint .",
     "precommit": "npm run lint",
     "prepush": "npm t && npm run coverage",
-    "semantic-release": "semantic-release pre && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [
     "semantic-release",
@@ -31,5 +30,10 @@
     "nyc": "^10.1.2",
     "semantic-release": "^6.3.2",
     "sinon": "^2.1.0"
+  },
+  "version": "0.0.0-development",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chasingmaxwell/release-sns.git"
   }
 }
