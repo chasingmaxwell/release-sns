@@ -1,0 +1,35 @@
+{
+  "name": "release-sns",
+  "version": "0.0.0-development",
+  "description": "Send an SNS message upon a semantic-release version bump.",
+  "main": "src/index.js",
+  "scripts": {
+    "coverage": "nyc check-coverage --statements 100 --lines 100 --branches 100 --functions 100",
+    "test": "nyc --check-coverage --statements 100 --lines 100 --branches 100 --functions 100 ava test",
+    "lint": "eslint .",
+    "precommit": "npm run lint",
+    "prepush": "npm t && npm run coverage",
+    "semantic-release": "semantic-release pre && semantic-release post"
+  },
+  "keywords": [
+    "semantic-release",
+    "semver",
+    "aws",
+    "sns"
+  ],
+  "author": "Peter Sieg <chasingmaxwell@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.28.0"
+  },
+  "devDependencies": {
+    "ava": "^0.18.2",
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb-base": "^11.1.1",
+    "eslint-plugin-import": "^2.2.0",
+    "husky": "^0.13.2",
+    "nyc": "^10.1.2",
+    "semantic-release": "^6.3.2",
+    "sinon": "^2.1.0"
+  }
+}
