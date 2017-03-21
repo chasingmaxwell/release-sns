@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/chasingmaxwell/release-sns.svg?branch=master)](https://travis-ci.org/chasingmaxwell/release-sns.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/chasingmaxwell/release-sns/badge.svg?branch=master)](https://coveralls.io/github/chasingmaxwell/release-sns?branch=master)
+
 # release-sns
 
 release-sns is a [semantic-release](https://github.com/semantic-release/semantic-release) plugin which allows you to send an AWS SNS message to a configured topic when a new version of your package is released.
