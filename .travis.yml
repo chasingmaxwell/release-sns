@@ -8,6 +8,8 @@ node_js:
   - '7'
   - '6'
   - '4'
+script:
+  - "./.travis-script.sh"
 before_script:
   - npm prune
 after_success:
