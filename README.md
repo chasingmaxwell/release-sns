@@ -38,3 +38,7 @@ release-sns is a [semantic-release](https://github.com/semantic-release/semantic
    ```
 
    Including semantic-release's default [release-notes-generator plugin](https://github.com/semantic-release/release-notes-generator) will preserve the release note generation which occurs by default. The `targetArn` property is required. If `region` is not provided, release-sns will default to "us-east-1".
+
+3. Add AWS authentication environment variables to your CI builds.
+
+   release-sns makes us of the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables in order to authenticate with AWS. You can create and view access keys by following [these directions](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) from Amazon.
