@@ -14,25 +14,27 @@ const snsStub = sinon.stub(aws, 'SNS').returns({ publish: publishStub });
 test.after.always(() => snsStub.restore());
 
 test.serial.cb('The plugin sends an SNS message.', (t) => {
-  t.plan(2);
+  t.plan(3);
   const targetArn = 'version:bump:yay';
+  const incompleteLog = 'Hi, I\'m a log.';
   const expectedSNSParams = {
     accessKeyId: '123',
     secretAccessKey: 'abc',
     region: 'us-east-1',
   };
   const expectedPublishParams = {
-    Message: '{"version":"v1.0.0"}',
+    Message: `{"version":"v1.0.0","changelog":"${incompleteLog}"}`,
     TargetArn: targetArn,
   };
-  plugin({ targetArn }, { pkg: { version: 'v1.0.0' } }, (err, res) => {
+  plugin({ targetArn, incompleteLog }, { pkg: { version: 'v1.0.0' } }, (err, res) => {
     t.is(err, null, 'Unexpected error.');
-    t.deepEqual(res, { it: 'worked' }, 'Unexpected response.');
+    t.deepEqual(res, incompleteLog, 'Unexpected response.');
     sinon.assert.calledWith(snsStub, expectedSNSParams);
     sinon.assert.calledWith(publishStub, expectedPublishParams);
 
     expectedSNSParams.region = 'us-west-1';
-    plugin({ targetArn, region: 'us-west-1' }, { pkg: { version: 'v1.0.0' } }, () => {
+    plugin({ targetArn, region: 'us-west-1' }, { pkg: { version: 'v1.0.0' } }, (_err, _res) => {
+      t.deepEqual(_res, '', 'Unexpected response.');
       sinon.assert.calledWith(snsStub, expectedSNSParams);
       t.end();
     });
